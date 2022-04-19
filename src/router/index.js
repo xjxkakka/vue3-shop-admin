@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import Login from '../components/Login'
-import { reqLogin } from '../api'
+import Login from '../views/Login'
+
 
 const routes = [
   {
@@ -15,7 +15,7 @@ const routes = [
   {
     path: '/home',
     name: 'Home',
-    component: () => import('../components/Home.vue')
+    component: () => import('../views/Home.vue')
   }
 ]
 
@@ -29,17 +29,19 @@ router.beforeEach((to, from, next) => {
    from 代表从哪个路径跳转而来
    next 是一个函数，表示要放行
    next()  放行   next('/login')  强制跳转*/
-  // 访问的login正常放行
-  if (to.path == '/login') next();
 
-  // 如果访问其他的先查看下有没token 没token强制跳转到登录页面
-  const tokenStr = localStorage.getItem("token");
-  if (!tokenStr){
-    return next('/login')
-  }else{
-    // 拿到token 像后端发送请求查看token是否正确，假的强制跳转登录页面 这里没后端校验
+  if (to.path === '/login'){
+    return next()
+  }else if (localStorage.getItem("token")){
+    // 如果有token就放行
+    // 正常这里最好发请求去后端校验一下后才放行  这里没有写接口
     next();
+  }else{
+    next('/login')
   }
+
+
+
 
 })
 
