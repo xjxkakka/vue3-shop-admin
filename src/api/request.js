@@ -15,16 +15,8 @@ const request = axios.create({
 //请求拦截器:在发送请求之前，请求拦截器可以检测到，可以在请求发出去之前做一些事情
 request.interceptors.request.use((config)=>{
 
-    /*
-        //请求头添加一个字段(userTempId):和后端商量好了
-        if (store.state.uuid_token){
-            config.headers.userTempId = store.state.uuid_token
-        }
-        //点击登录后，需要携带token带给服务器，查看仓库是否有token
-        if (user.state.token){
-            config.headers.token = user.state.token
-        }
-    */
+    // 为请求头对象，添加 token 验证的 Authorization 字段
+    config.headers.Authorization = localStorage.getItem("token")
 
     //config:配置对象，对象里面有一个属性很重要，headers请求头
     return config;
