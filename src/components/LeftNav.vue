@@ -16,7 +16,7 @@
       :collapse="isCollapse"
       :collapse-transition="false"
       router
-      default-active="users"
+      :default-active="DefaultActive"
   >
     <!--    一级菜单-->
     <!--    index 只接收字符串-->
@@ -50,7 +50,7 @@
 import { Menu } from '@element-plus/icons-vue'
 import { computed, onMounted, reactive, toRefs } from 'vue'
 import { reqGetMenuList } from '../api'
-import { useRouter } from 'vue-router'
+import { useRouter,useRoute } from 'vue-router'
 
 export default {
   name: "LeftNav",
@@ -58,6 +58,7 @@ export default {
   emits:['changeAside'],
   setup (props,ctx) {
     const router = useRouter()
+    const route = useRoute()
     const state = reactive({
       // 左侧菜单数据
       menuList: [],
@@ -75,6 +76,10 @@ export default {
     onMounted(() => {
       getMenuList();
 
+    })
+    // 计算默认高亮
+    const DefaultActive = computed(()=>{
+      return route.name
     })
     const getMenuList = () => {
       reqGetMenuList().then(res => {
@@ -101,7 +106,7 @@ export default {
       ctx.emit('changeAside')
     }
 
-    return { ...toRefs(state), handleOpen,handleClose ,toggleCollapse}
+    return { ...toRefs(state),DefaultActive, handleOpen,handleClose ,toggleCollapse}
   }
 }
 </script>

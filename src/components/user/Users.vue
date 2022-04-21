@@ -1,7 +1,6 @@
 <template>
   <!--面包屑导航区域-->
   <el-breadcrumb separator=">">
-
     <el-breadcrumb-item :to="{ path: '/home' }">首页</el-breadcrumb-item>
     <el-breadcrumb-item>用户管理</el-breadcrumb-item>
     <el-breadcrumb-item>用户列表</el-breadcrumb-item>
@@ -113,7 +112,7 @@
               placement="top"
               :enterable="false"
           >
-            <el-button type="warning">
+            <el-button type="warning" @click="setRole(row)">
               <template #icon>
                 <el-icon>
                   <Setting/>
@@ -163,11 +162,52 @@
       </span>
     </template>
   </el-dialog>
+
+  <!-- 分配角色的对话框 -->
+  <el-dialog
+      v-model="setRoleDialogVisible"
+      title="提示"
+      width="50%"
+      @close="setRoleDialogClosed"
+  >
+    <div class="userInfo">
+      <p>当前的用户:<span>{{ userInfo.username }}</span></p>
+      <p>当前的角色:<span>{{ userInfo.role_name }}</span></p>
+      <p>分配新角色:
+        <el-select :popper-append-to-body="false" popper-class="changeDialog_select-popper"
+            v-model="selectedRoleId"  placeholder="请选择" size="large">
+          <el-option
+              v-for="item in roleList"
+              :key="item.id"
+              :label="item.roleName"
+              :value="item.id"
+          />
+        </el-select>
+
+      </p>
+    </div>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="setRoleDialogVisible = false">取消</el-button>
+        <el-button type="primary" @click="saveRoleInfo"
+        >确认</el-button
+        >
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <script>
 import { Search, Edit, Delete, Setting } from '@element-plus/icons-vue'
-import { reqAddUser, reqChangeState, reqDeleteUserInfo, reqEditUserInfo, reqUserDetail, reqUserList } from '../../api'
+import {
+  reqAddUser, reqChangeRoles,
+  reqChangeState,
+  reqDeleteUserInfo,
+  reqEditUserInfo,
+  reqUserDetail,
+  reqUserInfo,
+  reqUserList
+} from '../../api'
 import { onMounted, reactive, ref, toRefs } from 'vue'
 
 export default {
@@ -237,6 +277,14 @@ export default {
       // 修改按钮的对话框控制
       editdialogVisible: false,
       editForm: {},
+      // 分配角色权限
+      setRoleDialogVisible: false,
+      // 需要被分配角色的用户信息
+      userInfo: {},
+      // 所有角色的数据列表
+      roleList:[],
+      // 已选中的id值
+      selectedRoleId:''
     })
     // 获取用户列表的参数对象
     const queryInfo = reactive({
@@ -362,16 +410,16 @@ export default {
           }
       ).then(() => {
         // 发请求
-        reqDeleteUserInfo(id).then(res=>{
+        reqDeleteUserInfo(id).then(res => {
           console.log(res)
           if (res.meta.status !== 200) new Promise.reject('删除失败')
-            ElMessage({
-              type: 'success',
-              message: '删除成功！',
-            })
+          ElMessage({
+            type: 'success',
+            message: '删除成功！',
+          })
           // 重新发起请求渲染
           getUserList();
-        }).catch(()=>{
+        }).catch(() => {
           ElMessage({
             type: 'info',
             message: '删除失败！',
@@ -379,24 +427,67 @@ export default {
         })
 
       }).catch(() => {
-            ElMessage({
-              type: 'info',
-              message: '删除失败！',
-            })
-          })
+        ElMessage({
+          type: 'info',
+          message: '删除失败！',
+        })
+      })
+    }
+
+    // 分配角色
+    const setRole = (row) => {
+      console.log(row)
+      state.userInfo = row
+
+      // 在展示对话框之前，获取所有角色的列表
+      reqUserInfo().then(res=>{
+        state.roleList = res.data
+      })
+      state.setRoleDialogVisible = true
+    }
+    // 对话框的确认按钮
+    const saveRoleInfo = ()=>{
+      reqChangeRoles(state.userInfo.id,state.selectedRoleId).then(res=>{
+        if(res.meta.status!==200){
+          ElMessage.error('更新角色失败!')
+        }else{
+          ElMessage.success('更新角色成功!')
+          getUserList()
+          state.setRoleDialogVisible = false
+        }
+      })
+    }
+    const setRoleDialogClosed = ()=>{
+      state.selectedRoleId = ''
+      state.userInfo = {}
     }
     // 三个点击按钮方法 E
     return {
       ...toRefs(state), ...toRefs(queryInfo),
       handleSizeChange,
-      userStateChanged, removeUserById,
-      getUserList, ruleFormRef, editFormRef, editUserInfo,
+      userStateChanged, removeUserById, setRole,setRoleDialogClosed,
+      getUserList, ruleFormRef, editFormRef, editUserInfo,saveRoleInfo,
       handleCurrentChange, handleClose, addUser, showEditDialog, editDialogClosed
     }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" >
+.userInfo {
+  font-size: 15px;
 
+  p {
+    line-height: 40px;
+  }
+
+  span {
+    margin-left: 10px;
+  }
+}
+.changeDialog_select-popper{
+  z-index: 1000!important;
+  top: auto !important;
+  left: auto !important;
+}
 </style>

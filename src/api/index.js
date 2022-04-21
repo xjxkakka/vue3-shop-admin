@@ -39,3 +39,59 @@ export const reqDeleteUserInfo = (id) => {
     return request({ url: `/users/${id}`, method: "delete" })
 }
 
+// 权限
+// 获取权限列表
+export const reqGetRightsList = () => {
+    return request({ url: `/rights/list`, method: "get" })
+}
+// 获取权限列表
+export const reqGetRightsTree = () => {
+    return request({ url: `/rights/tree`, method: "get" })
+}
+
+// 获取角色列表
+export const reqGetRolesList = () => {
+    return request({ url: `/roles`, method: "get" })
+}
+
+// 添加角色
+export const reqAddRoles = (data) => {
+    return request({ url: `/roles`,data, method: "post" })
+}
+
+// 获取角色详情
+export const reqRolesInfo = (id) => {
+    return request({ url: `/roles/${id}`, method: "get" })
+}
+
+// 获取编辑角色详情
+export const reqEditRolesInfo = (id,data) => {
+    return request({ url: `/roles/${id}`,data, method: "put" })
+}
+
+// 获取删除角色
+export const reqDeleteRolesInfo = (id) => {
+    return request({ url: `/roles/${id}`, method: "delete" })
+}
+
+// 获取删除角色权限
+export const reqDeleteRolesRights = (roleId,rightId) => {
+    return request({ url: `/roles/${roleId}/rights/${rightId}`, method: "delete" })
+}
+
+// 获取角色授权
+export const reqRolesAuthorization  = (roleId,data) => {
+    return request({ url: `roles/${roleId}/rights`,data:{rids:data} ,method: "post" })
+}
+
+// 获取角色列表
+export const reqUserInfo  = () => {
+    return request({ url: `roles`,method: "get" })
+}
+// 更新角色
+export const reqChangeRoles  = (id,rid) => {
+    return request({ url: `users/${id}/role`,data:{rid},method: "put" })
+}
+
+
+

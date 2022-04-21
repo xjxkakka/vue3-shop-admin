@@ -19,18 +19,18 @@ const routes = [
         redirect: '/home/users',
         children: [
             // 用户管理
-            { path: 'users', component: () => import('../components/user/Users.vue') },
+            { path: 'users',name:'users', component: () => import('../components/user/Users.vue') },
             // 权限管理
-            { path: 'rights', component: () => import('../components/Welcome.vue') },
-            { path: 'roles', component: () => import('../components/Welcome.vue') },
+            { path: 'rights',name:'rights', component: () => import('../components/power/Rights.vue') },
+            { path: 'roles',name:'roles', component: () => import('../components/power/Roles.vue') },
             // 商品管理
-            { path: 'goods', component: () => import('../components/Welcome.vue') },
-            { path: 'params', component: () => import('../components/Welcome.vue') },
-            { path: 'categories', component: () => import('../components/Welcome.vue') },
+            { path: 'goods',name:'goods', component: () => import('../components/Welcome.vue') },
+            { path: 'params',name:'params', component: () => import('../components/Welcome.vue') },
+            { path: 'categories',name:'categories', component: () => import('../components/Welcome.vue') },
             // 订单管理
-            { path: 'orders', component: () => import('../components/Welcome.vue') },
+            { path: 'orders',name:'orders', component: () => import('../components/Welcome.vue') },
             // 数据统计
-            { path: 'reports', component: () => import('../components/Welcome.vue') },
+            { path: 'reports',name:'reports', component: () => import('../components/Welcome.vue') },
         ]
     }
 ]
