@@ -94,4 +94,33 @@ export const reqChangeRoles  = (id,rid) => {
 }
 
 
+// 商品分类数据
+// 获取商品分类数据
+export const reqGetCategoryList  = (params) => {
+    return request({ url: `categories`,params,method: "get" })
+}
+
+
+// 获取父级分类的数据列表
+export const reqGetParentCateList  = () => {
+    return request({ url: `categories?type=2`,method: "get" })
+}
+
+// 添加分类的数据列表
+export const reqAddCateList  = (data) => {
+    return request({ url: `categories`,data,method: "post" })
+}
+
+// 添加删除的数据列表
+export const reqDeleteCateList  = (id) => {
+    return request({ url: `categories/${id}`,method: "delete" })
+}
+// 根据 id 查询分类
+export const reqGetCateInfo  = (id) => {
+    return request({ url: `categories/${id}`,method: "get" })
+}
+// 编辑提交分类
+export const reqEditCateInfo  = (id,data) => {
+    return request({ url: `categories/${id}`,data,method: "put" })
+}
 

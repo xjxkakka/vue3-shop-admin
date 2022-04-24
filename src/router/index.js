@@ -15,18 +15,18 @@ const routes = [
     {
         path: '/home',
         name: 'Home',
-        component: () => import('../views/Home.vue'),
+        component: () => import ('../views/Home.vue'),
         redirect: '/home/users',
         children: [
             // 用户管理
-            { path: 'users',name:'users', component: () => import('../components/user/Users.vue') },
+            { path: 'users',name:'users', component: () => import('../views/user/Users.vue') },
             // 权限管理
-            { path: 'rights',name:'rights', component: () => import('../components/power/Rights.vue') },
-            { path: 'roles',name:'roles', component: () => import('../components/power/Roles.vue') },
+            { path: 'rights',name:'rights', component: () => import('../views/power/Rights.vue') },
+            { path: 'roles',name:'roles', component: () => import('../views/power/Roles.vue') },
             // 商品管理
             { path: 'goods',name:'goods', component: () => import('../components/Welcome.vue') },
             { path: 'params',name:'params', component: () => import('../components/Welcome.vue') },
-            { path: 'categories',name:'categories', component: () => import('../components/Welcome.vue') },
+            { path: 'categories',name:'categories', component: () => import('../views/goods/Categories.vue') },
             // 订单管理
             { path: 'orders',name:'orders', component: () => import('../components/Welcome.vue') },
             // 数据统计
