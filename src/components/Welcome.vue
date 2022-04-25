@@ -14,7 +14,9 @@
 </template>
 <script  setup>
 
+let arr = '123'
 
+console.log(typeof arr)
 const tableData = [
   {
     id: 1,

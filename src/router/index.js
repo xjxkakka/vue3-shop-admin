@@ -25,7 +25,7 @@ const routes = [
             { path: 'roles',name:'roles', component: () => import('../views/power/Roles.vue') },
             // 商品管理
             { path: 'goods',name:'goods', component: () => import('../components/Welcome.vue') },
-            { path: 'params',name:'params', component: () => import('../components/Welcome.vue') },
+            { path: 'params',name:'params', component: () => import('../views/goods/Params.vue') },
             { path: 'categories',name:'categories', component: () => import('../views/goods/Categories.vue') },
             // 订单管理
             { path: 'orders',name:'orders', component: () => import('../components/Welcome.vue') },

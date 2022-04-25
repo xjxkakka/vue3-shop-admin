@@ -124,3 +124,34 @@ export const reqEditCateInfo  = (id,data) => {
     return request({ url: `categories/${id}`,data,method: "put" })
 }
 
+
+// 获取所有的商品分类列表
+export const reqGetGoodsCateList  = () => {
+    return request({ url: `categories`,method: "get" })
+}
+
+
+// 分类参数管理
+// 参数列表
+export const reqGetCateAttrList  = (id,type) => {
+    return request({ url: `categories/${id}/attributes`,params:{sel:type},method: "get" })
+}
+
+// 添加参数
+export const reqAddCateParams  = (id,data) => {
+    return request({ url: `categories/${id}/attributes`,data,method: "post" })
+}
+
+// 查询某个参数字段   第一个参数三级分类的id，第二个自身的id
+export const reqQueryParams  = (cateId,attrId,params) => {
+    return request({ url: `categories/${cateId}/attributes/${attrId}`,params,method: "get" })
+}
+
+// 编辑某个参数字段
+export const reqEditParams  = (cateId,attrId,data) => {
+    return request({ url: `categories/${cateId}/attributes/${attrId}`,data,method: "put" })
+}
+// 删除某个参数字段
+export const reqDelParams  = (cateId,attrId) => {
+    return request({ url: `categories/${cateId}/attributes/${attrId}`,method: "delete" })
+}
