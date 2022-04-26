@@ -15,3 +15,6 @@ export const reqDeleteGoodsInfo = (id) => {
 export const reqAddGoodsInfo = (data) => {
     return request({ url: `/goods`,data, method: "post" })
 }
+export const reqPutGoodsInfo = (id,data) => {
+    return request({ url: `/goods/${id}`,data, method: "put" })
+}

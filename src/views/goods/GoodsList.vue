@@ -48,6 +48,7 @@
         @current-change="handleCurrentChange"
     />
   </el-card>
+
 </template>
 
 <script setup>
@@ -145,9 +146,11 @@ const handleCurrentChange = (val) => {
 
 }
 // 分页器 E
-const handleEdit = ()=>{
+const handleEdit = (id)=>{
+  console.log(id)
   ElMessage.warning('该功能正在开发中!')
 }
+
 </script>
 
 <style scoped>

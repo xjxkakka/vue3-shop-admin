@@ -15,13 +15,20 @@
 </template>
 <script  setup>
 
+import { reqPutGoodsInfo } from '../api/goods'
+
 let a = [1,2,3,4,5,6,7]
 let b =[...a]
 console.log(a,b)
 const add = ()=>{
-  b.push(88)
-  console.log(a)
-  console.log(b)
+  reqPutGoodsInfo(926,{
+    goods_name:'我不在拉',
+    goods_price:123,
+    goods_number:32,
+    goods_weight:23,
+  }).then(res=>{
+    console.log(res)
+  })
 }
 
 const tableData = [
