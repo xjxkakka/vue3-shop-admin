@@ -19,18 +19,19 @@ const routes = [
         redirect: '/home/users',
         children: [
             // 用户管理
-            { path: 'users',name:'users', component: () => import('../views/user/Users.vue') },
+            { path: 'users',name:'Users', component: () => import('../views/user/Users.vue') },
             // 权限管理
-            { path: 'rights',name:'rights', component: () => import('../views/power/Rights.vue') },
-            { path: 'roles',name:'roles', component: () => import('../views/power/Roles.vue') },
+            { path: 'rights',name:'Rights', component: () => import('../views/power/Rights.vue') },
+            { path: 'roles',name:'Roles', component: () => import('../views/power/Roles.vue') },
             // 商品管理
-            { path: 'goods',name:'goods', component: () => import('../components/Welcome.vue') },
-            { path: 'params',name:'params', component: () => import('../views/goods/Params.vue') },
-            { path: 'categories',name:'categories', component: () => import('../views/goods/Categories.vue') },
+            { path: 'goods',name:'Goods', component: () => import('../views/goods/GoodsList.vue') },
+            { path: 'params',name:'Params', component: () => import('../views/goods/Params.vue') },
+            { path: 'categories',name:'Categories', component: () => import('../views/goods/Categories.vue') },
+            { path: 'add',name:'Add', component: () => import('../views/goods/Add.vue') },
             // 订单管理
-            { path: 'orders',name:'orders', component: () => import('../components/Welcome.vue') },
+            { path: 'orders',name:'Orders', component: () => import('../components/Welcome.vue') },
             // 数据统计
-            { path: 'reports',name:'reports', component: () => import('../components/Welcome.vue') },
+            { path: 'reports',name:'Reports', component: () => import('../components/Welcome.vue') },
         ]
     }
 ]

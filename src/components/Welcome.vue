@@ -11,12 +11,19 @@
       <el-table-column prop="name" label="Name"  width="180" />
     </el-table>
   </div>
+  <button @click="add">+1</button>
 </template>
 <script  setup>
 
-let arr = '123'
+let a = [1,2,3,4,5,6,7]
+let b =[...a]
+console.log(a,b)
+const add = ()=>{
+  b.push(88)
+  console.log(a)
+  console.log(b)
+}
 
-console.log(typeof arr)
 const tableData = [
   {
     id: 1,
