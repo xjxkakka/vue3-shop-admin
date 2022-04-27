@@ -27,7 +27,7 @@
       <el-table-column prop="goods_weight" label="商品重量" align="center" width="180"/>
       <el-table-column label="创建时间" width="180" align="center">
         <template #default="{row}">
-          {{ formatTime(row.add_time) }}
+          {{ formatTime((row.add_time*1000)) }}
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" width="200">

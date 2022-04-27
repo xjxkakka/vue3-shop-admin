@@ -12,7 +12,7 @@
     <el-table-column prop="is_send" label="是否发货" align="center" width="150"/>
     <el-table-column label="下单时间" width="180" align="center">
       <template #default="{row}">
-        {{ formatTime(row.create_time) }}
+        {{ formatTime((row.create_time*1000)) }}
       </template>
     </el-table-column>
     <el-table-column align="center" label="操作" width="180">
