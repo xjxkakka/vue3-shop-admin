@@ -31,7 +31,7 @@ const routes = [
             // 订单管理
             { path: 'orders',name:'Orders', component: () => import('../views/order/Order.vue') },
             // 数据统计
-            { path: 'reports',name:'Reports', component: () => import('../components/Welcome.vue') },
+            { path: 'reports',name:'Reports', component: () => import('../views/report/Report.vue') },
         ]
     }
 ]

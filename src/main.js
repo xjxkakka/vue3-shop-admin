@@ -5,6 +5,7 @@ import store from './store'
 // 引入图标库
 import '../src/assets/fonts/iconfont.css'
 import '../src/assets/css/index.scss'
+
 const app = createApp(App)
-// app.use(ElementPlus)
+
 app.use(store).use(router).mount('#app')

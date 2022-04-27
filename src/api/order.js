@@ -5,3 +5,8 @@ import request from "./request";
 export const reqGetOrderList = (params) => {
     return request({ url: `/orders`, params, method: "get" })
 }
+
+// 商品列表数据
+export const reqGetEcharts= () => {
+    return request({ url: `/reports/type/1`, method: "get" })
+}
