@@ -33,3 +33,14 @@ git checkout -b login
 npm install @vueup/vue-quill@beta --save
 ```
 [使用地方](./src/views/goods/Add.vue)
+
+##### 打包移除项目中所有console.log()
+npm i babel-plugin-transform-remove-console
+在babel.config.js中
+```
+module.exports = {
+  plugins: [
+      'transform-remove-console'
+  ]
+}
+```

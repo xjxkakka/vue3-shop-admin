@@ -1,5 +1,15 @@
+// 这是项目发布阶段需要用到的 babel 插件
+const prodPlugins = []
+if (process.env.NODE_ENV === 'production'){
+  // 这里限制只有生产模式才会生效
+  prodPlugins.push('transform-remove-console')
+}
+
 module.exports = {
   presets: [
     '@vue/cli-plugin-babel/preset'
+  ],
+  plugins: [
+      ...prodPlugins
   ]
 }
