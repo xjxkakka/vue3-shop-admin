@@ -29,7 +29,7 @@ const routes = [
             { path: 'categories',name:'Categories', component: () => import('../views/goods/Categories.vue') },
             { path: 'add',name:'Add', component: () => import('../views/goods/Add.vue') },
             // 订单管理
-            { path: 'orders',name:'Orders', component: () => import('../components/Welcome.vue') },
+            { path: 'orders',name:'Orders', component: () => import('../views/order/Order.vue') },
             // 数据统计
             { path: 'reports',name:'Reports', component: () => import('../components/Welcome.vue') },
         ]
